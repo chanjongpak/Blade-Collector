@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Blade List</h1>
+
+{% for blade in blades %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ blade.name }}</span>
+    <p>Sword Type: {{ blade.type }}</p>
+    <p>Weight: {{ blade.weight }} lbs</p>
+    <p>Flexibility: {{ blade.flexibility }}</p>
+    <p>Description: {{ blade.description }}</p>
+  </div>
+</div>
+{% endfor %} {% endblock %}
