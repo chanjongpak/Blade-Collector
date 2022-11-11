@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="col s6">
-    <form action="{% url 'add_maintenance' blade_id %}" method="post">
+    <form action="{% url 'add_maintenance' blade.id %}" method="post">
       {% csrf_token %} {{ maintenance_form.as_p }}
       <input type="submit" class="btn" value="Add Maintenance" />
     </form>
