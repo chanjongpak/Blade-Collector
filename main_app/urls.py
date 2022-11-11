@@ -5,4 +5,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('blades/', views.blades_index, name='index'),
+    path('blades/<int:blade_id>/', views.blade_detail, name='detail'),
+    path('blades/create/', views.BladeCreate.as_view(), name='blades_create'),
+    path('blades/<int:pk>/update/', views.BladeUpdate.as_view(), name='blades_update'),
+    path('blades/<int:pk>/delete/', views.BladeDelete.as_view(), name='blades_delete'),
+    path('blades/<int:blade_id>/add_maintenance/', views.add_maintenance, name='add_maintenance'),
 ]

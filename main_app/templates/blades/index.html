@@ -4,12 +4,14 @@
 
 {% for blade in blades %}
 <div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ blade.name }}</span>
-    <p>Sword Type: {{ blade.type }}</p>
-    <p>Weight: {{ blade.weight }} lbs</p>
-    <p>Flexibility: {{ blade.flexibility }}</p>
-    <p>Description: {{ blade.description }}</p>
-  </div>
+  <a href="{% url 'detail' blade.id %}">
+    <div class="card-content">
+      <span class="card-title">{{ blade.name }}</span>
+      <p>Sword Type: {{ blade.type }}</p>
+      <p>Weight: {{ blade.weight }} lbs</p>
+      <p>Flexibility: {{ blade.flexibility }}</p>
+      <p>Description: {{ blade.description }}</p>
+    </div>
+  </a>
 </div>
 {% endfor %} {% endblock %}

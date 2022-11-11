@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Cat Details</h1>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ blade.name }}</span>
+        <p>Type: {{ blade.type }}</p>
+        <p>Weight: {{ blade.weight }}</p>
+        <p>Flexibility: {{ blade.flexibility }}</p>
+        <p>Description: {{ blade.description }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'blades_update' blade.id %}">Edit</a>
+        <a href="{% url 'blades_delete' blade.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+  <div class="col s6">
+    <form action="{% url 'add_maintenance' blade_id %}" method="post">
+      {% csrf_token %} {{ maintenance_form.as_p }}
+      <input type="submit" class="btn" value="Add Maintenance" />
+    </form>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Maintenance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for maintenance in blade.maintenance_set.all %}
+        <tr>
+          <td>{{maintenance.date}}</td>
+          <td>{{maintenance.get_duty_display}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  var dateEl = document.getElementById("id_date");
+  M.Datepicker.init(dateEl, {
+    format: "yyyy-mm-dd",
+    defaultDate: new Date(),
+    seetDefaultDate: true,
+    autoClose: true,
+  });
+
+  var selectEl = document.getElementById("id_duty");
+  M.FormSelect.init(selectEl);
+</script>
+
+{% endblock %}
