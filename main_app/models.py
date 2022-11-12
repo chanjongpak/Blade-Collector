@@ -8,12 +8,23 @@ DUTIES = (
     ('D', 'Dust Sheath')
 )
 
+class Accessory(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('accessories_detail', kwargs={'pk': self.id})
+
 class Blade(models.Model):
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     weight = models.IntegerField()
     flexibility = models.CharField(max_length=20)
     description = models.TextField(max_length=300)
+    accessories = models.ManyToManyField(Accessory)
 
     def __str__(self):
         return self.name

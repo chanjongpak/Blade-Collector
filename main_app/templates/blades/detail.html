@@ -41,6 +41,55 @@
     </table>
   </div>
 </div>
+<hr />
+<div class="row">
+  <div class="col s6">
+    <h3>{{ blade.name }} Accessories</h3>
+    {% if blade.accessories.count %} {% for accessory in blade.accessories.all%}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A
+          <span style="color: {{ accessory.color }}"
+            >{{ accessory.color }}</span
+          >
+          {{ accessory.name }}
+        </span>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>No Accessories :(</h5>
+    {% endif %}
+  </div>
+  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Available Accessories</h3>
+    {% if accessories.count %} {% for accessory in accessories.all %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          A
+          <span style="color: {{ accessory.color }}"
+            >{{ accessory.color }}</span
+          >
+          {{ accessory.name }}
+        </span>
+      </div>
+      <div class="card-action">
+        <form
+          action="{% url 'assoc_accessory' blade.id accessory.id %}"
+          method="post"
+        >
+          {% csrf_token %}
+          <button type="submit" class="btn">Add</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h5>{{blade.name}} Already Has All Accessories Available</h5>
+    {% endif %}
+  </div>
+</div>
 <script>
   var dateEl = document.getElementById("id_date");
   M.Datepicker.init(dateEl, {
